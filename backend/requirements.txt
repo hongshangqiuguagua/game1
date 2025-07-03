@@ -1,0 +1,18 @@
+# FastAPI框架及其依赖
+fastapi>=0.95.0
+uvicorn>=0.21.0
+python-multipart>=0.0.6
+pydantic>=1.10.7
+pydantic[email]>=1.10.7
+
+# 数据库相关
+sqlalchemy>=2.0.9
+python-jose>=3.3.0
+passlib>=1.7.4
+bcrypt>=4.0.1
+
+# 实用工具
+python-dotenv>=1.0.0
+
+# 生产环境可选依赖
+# gunicorn>=21.0.0  # 用于生产环境部署 
