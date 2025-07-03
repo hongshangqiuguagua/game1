@@ -173,6 +173,8 @@ export default {
   flex-direction: column;
   background-color: #fff;
   overflow: hidden;
+  padding: 0 16px;
+  flex: 1;
 }
 
 /* 淡入淡出过渡效果 */

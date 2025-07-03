@@ -27,7 +27,7 @@
             type="primary"
             :loading="loading"
             @click="handleLogin"
-            class="login-button"
+            class="login-button pulse-button"
           >
             登录
           </el-button>
@@ -37,7 +37,7 @@
       <div class="form-footer">
         <p>
           还没有账号？
-          <router-link to="/register">立即注册</router-link>
+          <router-link to="/register" class="animated-link">立即注册</router-link>
         </p>
       </div>
     </div>
@@ -127,7 +127,10 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #f5f7fa;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .login-card {
@@ -135,13 +138,45 @@ export default {
   padding: 30px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .title {
   text-align: center;
   margin-bottom: 30px;
   color: #303133;
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: #409eff;
+  animation: expandWidth 1s ease-out forwards;
+}
+
+@keyframes expandWidth {
+  from { width: 0; }
+  to { width: 80px; }
 }
 
 .form-actions {
@@ -150,6 +185,29 @@ export default {
 
 .login-button {
   width: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.pulse-button {
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 0 rgba(64, 158, 255, 0.4);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(64, 158, 255, 0.4);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(64, 158, 255, 0);
+    transform: scale(1.02);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(64, 158, 255, 0);
+    transform: scale(1);
+  }
 }
 
 .form-footer {
@@ -159,12 +217,29 @@ export default {
   color: #606266;
 }
 
-.form-footer a {
+.animated-link {
   color: #409eff;
   text-decoration: none;
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-.form-footer a:hover {
-  text-decoration: underline;
+.animated-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #409eff;
+  transition: width 0.3s ease;
+}
+
+.animated-link:hover::after {
+  width: 100%;
+}
+
+.animated-link:hover {
+  color: #66b1ff;
 }
 </style> 

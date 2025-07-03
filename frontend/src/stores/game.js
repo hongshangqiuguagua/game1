@@ -107,6 +107,11 @@ export const useGameStore = defineStore('game', {
     
     // 选择邮件
     selectEmail(emailId) {
+      if (emailId === null) {
+        this.selectedEmail = null;
+        return;
+      }
+      
       const email = this.emails.find(email => email.id === emailId)
       if (email) {
         this.selectedEmail = email

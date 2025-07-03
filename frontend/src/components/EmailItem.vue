@@ -11,7 +11,12 @@
     draggable="true"
     @dragstart="handleDragStart"
     @dragend="handleDragEnd"
+    @mouseover="showDragHint = true"
+    @mouseleave="showDragHint = false"
   >
+    <div class="drag-indicator" :class="{'visible': showDragHint}">
+      <div class="drag-dots"></div>
+    </div>
     <div class="email-sender">
       <div class="sender-avatar">{{ getSenderInitial() }}</div>
       <div class="sender-info">
@@ -62,6 +67,7 @@ export default {
   
   setup(props, { emit }) {
     const isDragging = ref(false);
+    const showDragHint = ref(false);
     
     // 获取邮件预览文本
     const getPreviewText = () => {
@@ -124,6 +130,7 @@ export default {
     
     return {
       isDragging,
+      showDragHint,
       getPreviewText,
       getFormattedDate,
       getSenderInitial,
@@ -138,7 +145,7 @@ export default {
 
 <style scoped>
 .email-item {
-  padding: 12px 16px;
+  padding: 12px 16px 12px 32px;
   border-bottom: 1px solid #f0f0f0;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -149,6 +156,8 @@ export default {
 .email-item:hover {
   background-color: #f3f2f1;
   z-index: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transform: translateY(-1px);
 }
 
 .email-item.selected {
@@ -164,6 +173,41 @@ export default {
   opacity: 0.85;
   background-color: #f9f9f9;
   border-left: 3px solid #e57373;
+}
+
+/* 拖动指示器 */
+.drag-indicator {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 20px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drag-indicator.visible {
+  opacity: 0.7;
+}
+
+.drag-dots {
+  width: 4px;
+  height: 12px;
+  background-image: radial-gradient(circle, #888 1.5px, transparent 1.5px);
+  background-size: 4px 4px;
+  background-repeat: repeat-y;
+}
+
+.email-item:hover .drag-indicator {
+  opacity: 0.7;
+}
+
+.email-item:active .drag-indicator {
+  opacity: 1;
 }
 
 .email-sender {
@@ -248,29 +292,37 @@ export default {
 /* 恢复按钮 */
 .email-restore-btn {
   position: absolute;
-  top: 0;
-  right: 0;
-  color: #0078d4;
-  font-size: 16px;
+  top: 10px;
+  right: 10px;
   width: 24px;
   height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+  background-color: rgba(0, 120, 212, 0.1);
   opacity: 0;
   transition: all 0.2s ease;
-  z-index: 10;
+  color: #0078d4;
 }
 
 .email-item:hover .email-restore-btn {
   opacity: 1;
-  background-color: rgba(0, 120, 212, 0.1);
+  background-color: rgba(0, 120, 212, 0.15);
 }
 
 .email-restore-btn:hover {
   background-color: #0078d4;
   color: white;
   transform: scale(1.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 拖拽时的样式 */
+.email-item:active {
+  cursor: grabbing;
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0.9;
 }
 </style> 

@@ -31,34 +31,42 @@
       </div>
       <div class="toolbar-actions">
         <div class="action-group">
-          <el-button type="primary" size="small" disabled>
+          <el-button type="primary" size="small" disabled class="disabled-button">
             <el-icon><el-icon-plus /></el-icon>
             <span>新邮件</span>
           </el-button>
         </div>
         <div class="action-group">
-          <el-button type="text" size="small" disabled>
+          <el-button type="text" size="small" disabled class="disabled-button">
             <el-icon><el-icon-delete /></el-icon>
             <span>删除</span>
           </el-button>
-          <el-button type="text" size="small" disabled>
+          <el-button type="text" size="small" disabled class="disabled-button">
             <el-icon><el-icon-folder /></el-icon>
             <span>存档</span>
           </el-button>
-          <el-button v-if="currentView === 'inbox'" type="warning" size="small" @click="identifyPhishingPrompt">
+          <el-button v-if="currentView === 'inbox'" type="warning" size="small" @click="identifyPhishingPrompt" class="operable-button">
             <el-icon><el-icon-warning /></el-icon>
             <span>标记为钓鱼邮件</span>
+            <div class="action-hint">点击标记</div>
           </el-button>
-          <el-button v-else type="success" size="small" @click="switchView('inbox')">
+          <el-button v-else type="success" size="small" @click="switchView('inbox')" class="operable-button">
             <el-icon><el-icon-back /></el-icon>
             <span>返回收件箱</span>
+            <div class="action-hint">点击返回</div>
           </el-button>
         </div>
         
         <!-- 游戏操作按钮组 -->
         <div class="game-action-group">
-          <el-button type="warning" @click="exitGame" :disabled="loading">退出游戏</el-button>
-          <el-button type="primary" @click="submitLevel" :disabled="loading">完成本关</el-button>
+          <el-button type="warning" @click="exitGame" :disabled="loading" class="operable-button">
+            退出游戏
+            <div class="action-hint">点击退出</div>
+          </el-button>
+          <el-button type="primary" @click="submitLevel" :disabled="loading" class="operable-button">
+            完成本关
+            <div class="action-hint">完成判断</div>
+          </el-button>
         </div>
       </div>
     </div>
@@ -94,145 +102,178 @@
       />
     </div>
     
-    <div class="email-client" v-if="!loading">
-      <div class="sidebar">
-        <div class="folder-list">
-          <div class="user-profile">
-            <div class="avatar">{{ getCurrentUserInitial() }}</div>
-            <div class="user-info">
-              <div class="username">当前用户</div>
-              <div class="email">user@example.com</div>
+    <!-- 拖拽教程动画 -->
+    <div v-if="showTutorial" class="tutorial-overlay" @click="dismissTutorial">
+      <div class="tutorial-content" @click.stop>
+        <div class="tutorial-header">
+          <div class="tutorial-title">邮件拖拽功能</div>
+          <el-button type="text" @click="dismissTutorial" class="tutorial-close">
+            <el-icon><el-icon-close /></el-icon>
+          </el-button>
+        </div>
+        <div class="tutorial-body">
+          <div class="tutorial-step">
+            <div class="tutorial-animation">
+              <div class="animation-email"></div>
+              <div class="animation-arrow"></div>
+              <div class="animation-folder"></div>
+            </div>
+            <div class="tutorial-text">
+              <p>在本游戏中，您可以通过拖拽方式将可疑邮件移至垃圾桶，或将误删的邮件恢复到收件箱。</p>
+              <p>请尝试点击并拖动邮件至对应的文件夹。</p>
             </div>
           </div>
-          
-          <div class="folder-header">收藏夹</div>
-          <div 
-            class="folder" 
-            :class="{ active: currentView === 'inbox', 'drag-over': isDragOverInbox }"
-            data-folder="inbox"
-            @click="switchView('inbox')"
-            @dragover="handleDragOverInbox"
-            @dragleave="handleDragLeaveInbox"
-            @drop="handleDropToInbox"
-          >
-            <el-icon><el-icon-message /></el-icon>
-            <span>收件箱</span>
-            <span class="count" v-if="inboxEmails.length > 0">{{ inboxEmails.length }}</span>
+        </div>
+        <div class="tutorial-footer">
+          <el-checkbox v-model="dontShowAgain">不再显示</el-checkbox>
+          <el-button type="primary" @click="dismissTutorial">我知道了</el-button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="email-client" v-if="!loading">
+      <div class="sidebar">
+        <div class="user-profile">
+          <div class="avatar">{{ getCurrentUserInitial() }}</div>
+          <div class="user-info">
+            <div class="username">当前用户</div>
+            <div class="email">user@example.com</div>
           </div>
-          <div class="folder">
-            <el-icon><el-icon-star /></el-icon>
-            <span>已加星标</span>
-          </div>
-          
-          <div class="folder-header">文件夹</div>
-          <div 
-            class="folder" 
-            :class="{ active: currentView === 'trash', 'drag-over': isDragOverTrash }" 
-            data-folder="trash" 
-            @click="switchView('trash')"
-            @dragover="handleDragOverTrash" 
-            @dragleave="handleDragLeaveTrash" 
-            @drop="handleDropToTrash"
-          >
-            <el-icon><el-icon-delete /></el-icon>
-            <span>垃圾桶</span>
-            <span class="count" v-if="trashEmails.length > 0">{{ trashEmails.length }}</span>
-          </div>
-          <div class="folder">
-            <el-icon><el-icon-position /></el-icon>
-            <span>已发送</span>
-          </div>
-          <div class="folder">
-            <el-icon><el-icon-document /></el-icon>
-            <span>草稿</span>
-          </div>
-          <div class="folder">
-            <el-icon><el-icon-folder /></el-icon>
-            <span>存档</span>
-          </div>
+        </div>
+        
+        <div class="folder-header">收藏夹</div>
+        <div 
+          class="folder" 
+          :class="{ active: currentView === 'inbox', 'drag-over': isDragOverInbox, 'operable-folder': true }"
+          data-folder="inbox"
+          @click="switchView('inbox')"
+          @dragover="handleDragOverInbox"
+          @dragleave="handleDragLeaveInbox"
+          @drop="handleDropToInbox"
+        >
+          <el-icon><el-icon-message /></el-icon>
+          <span>收件箱</span>
+          <span class="count" v-if="inboxEmails.length > 0">{{ inboxEmails.length }}</span>
+          <div class="folder-hint" v-if="currentView !== 'inbox'">可拖放区域</div>
+        </div>
+        <div class="folder non-interactive">
+          <el-icon><el-icon-star /></el-icon>
+          <span>已加星标</span>
+        </div>
+        
+        <div class="folder-header">文件夹</div>
+        <div 
+          class="folder" 
+          :class="{ active: currentView === 'trash', 'drag-over': isDragOverTrash, 'operable-folder': true }" 
+          data-folder="trash" 
+          @click="switchView('trash')"
+          @dragover="handleDragOverTrash" 
+          @dragleave="handleDragLeaveTrash" 
+          @drop="handleDropToTrash"
+        >
+          <el-icon><el-icon-delete /></el-icon>
+          <span>垃圾桶</span>
+          <span class="count" v-if="trashEmails.length > 0">{{ trashEmails.length }}</span>
+          <div class="folder-hint" v-if="currentView !== 'trash'">可拖放区域</div>
+        </div>
+        <div class="folder non-interactive">
+          <el-icon><el-icon-position /></el-icon>
+          <span>已发送</span>
+        </div>
+        <div class="folder non-interactive">
+          <el-icon><el-icon-document /></el-icon>
+          <span>草稿</span>
+        </div>
+        <div class="folder non-interactive">
+          <el-icon><el-icon-folder /></el-icon>
+          <span>存档</span>
         </div>
       </div>
       
       <div class="email-content-wrapper">
-        <div class="email-list-header">
-          <div class="list-title">{{ currentView === 'inbox' ? '收件箱' : '垃圾桶' }}</div>
-          <div class="list-actions">
-            <el-tooltip content="刷新" placement="bottom">
-              <el-icon class="action-icon"><el-icon-refresh /></el-icon>
-            </el-tooltip>
-            <el-tooltip content="排序" placement="bottom">
-              <el-icon class="action-icon"><el-icon-sort /></el-icon>
-            </el-tooltip>
-            <el-tooltip content="更多操作" placement="bottom">
-              <el-icon class="action-icon"><el-icon-more /></el-icon>
-            </el-tooltip>
+        <div class="email-container">
+          <div class="email-list-header">
+            <div class="list-title">{{ currentView === 'inbox' ? '收件箱' : '垃圾桶' }}</div>
+            <div class="list-actions">
+              <el-tooltip content="刷新" placement="bottom">
+                <el-icon class="action-icon"><el-icon-refresh /></el-icon>
+              </el-tooltip>
+              <el-tooltip content="排序" placement="bottom">
+                <el-icon class="action-icon"><el-icon-sort /></el-icon>
+              </el-tooltip>
+              <el-tooltip content="更多操作" placement="bottom">
+                <el-icon class="action-icon"><el-icon-more /></el-icon>
+              </el-tooltip>
+            </div>
           </div>
-        </div>
-        
-        <div class="email-list">
-          <!-- 收件箱视图 -->
-          <template v-if="currentView === 'inbox' && inboxEmails.length > 0">
-            <TransitionGroup name="email-list" tag="div" class="email-list-container">
-            <EmailItem
-              v-for="email in inboxEmails"
-              :key="email.id"
-              :email="email"
-              :is-read="isEmailRead(email.id)"
-              :is-selected="selectedEmail && selectedEmail.id === email.id"
-              @click="selectEmail(email.id)"
-                @dragstart="handleDragStart($event, email.id)"
-            />
-            </TransitionGroup>
-          </template>
           
-          <!-- 垃圾箱视图 -->
-          <template v-else-if="currentView === 'trash' && trashEmails.length > 0">
-            <TransitionGroup name="email-list" tag="div" class="email-list-container">
+          <div class="email-list">
+            <!-- 收件箱视图 -->
+            <template v-if="currentView === 'inbox' && inboxEmails.length > 0">
+              <TransitionGroup name="email-list" tag="div" class="email-list-container">
               <EmailItem
-                v-for="email in trashEmails"
+                v-for="email in inboxEmails"
                 :key="email.id"
                 :email="email"
                 :is-read="isEmailRead(email.id)"
                 :is-selected="selectedEmail && selectedEmail.id === email.id"
-                :is-in-trash="true"
                 @click="selectEmail(email.id)"
-                @dragstart="handleDragStart($event, email.id)"
-                @restore="restoreFromTrash"
+                  @dragstart="handleDragStart($event, email.id)"
               />
-            </TransitionGroup>
-          </template>
-          
-          <el-empty v-else :description="currentView === 'inbox' ? '收件箱为空' : '垃圾桶为空'"></el-empty>
-      </div>
-      
-      <div class="content-area">
+              </TransitionGroup>
+            </template>
+            
+            <!-- 垃圾箱视图 -->
+            <template v-else-if="currentView === 'trash' && trashEmails.length > 0">
+              <TransitionGroup name="email-list" tag="div" class="email-list-container">
+                <EmailItem
+                  v-for="email in trashEmails"
+                  :key="email.id"
+                  :email="email"
+                  :is-read="isEmailRead(email.id)"
+                  :is-selected="selectedEmail && selectedEmail.id === email.id"
+                  :is-in-trash="true"
+                  @click="selectEmail(email.id)"
+                  @dragstart="handleDragStart($event, email.id)"
+                  @restore="restoreFromTrash"
+                />
+              </TransitionGroup>
+            </template>
+            
+            <el-empty v-else :description="currentView === 'inbox' ? '收件箱为空' : '垃圾桶为空'"></el-empty>
+          </div>
+        </div>
+        
+        <div class="content-area">
           <div v-if="selectedEmail" class="content-toolbar">
             <div class="toolbar-actions">
               <el-tooltip content="回复" placement="bottom">
-                <div class="toolbar-button"><el-icon><el-icon-reply /></el-icon></div>
+                <div class="toolbar-button disabled-button"><el-icon><el-icon-reply /></el-icon></div>
               </el-tooltip>
               <el-tooltip content="转发" placement="bottom">
-                <div class="toolbar-button"><el-icon><el-icon-share /></el-icon></div>
+                <div class="toolbar-button disabled-button"><el-icon><el-icon-share /></el-icon></div>
               </el-tooltip>
               
               <!-- 根据当前视图显示不同的操作按钮 -->
               <template v-if="isSelectedEmailInTrash">
                 <el-tooltip content="恢复邮件" placement="bottom">
-                  <div class="toolbar-button highlight-button" @click="restoreCurrentEmail">
+                  <div class="toolbar-button highlight-button operable-button" @click="restoreCurrentEmail">
                     <el-icon><el-icon-top /></el-icon>
+                    <div class="button-action-hint">点击恢复</div>
                   </div>
                 </el-tooltip>
               </template>
               <template v-else>
                 <el-tooltip content="移至垃圾桶" placement="bottom">
-                  <div class="toolbar-button" @click="moveCurrentEmailToTrash">
+                  <div class="toolbar-button operable-button" @click="moveCurrentEmailToTrash">
                     <el-icon><el-icon-delete /></el-icon>
+                    <div class="button-action-hint">点击删除</div>
                   </div>
                 </el-tooltip>
               </template>
             </div>
           </div>
-        <EmailContent :email="selectedEmail" />
+          <EmailContent :email="selectedEmail" />
         </div>
       </div>
     </div>
@@ -289,6 +330,24 @@ export default {
     const isDragOverTrash = ref(false)
     const isDragOverInbox = ref(false)
     const currentView = ref('inbox') // 新增：当前视图（收件箱或垃圾桶）
+    
+    // 教程相关
+    const tutorialKey = 'phishing_game_tutorial_shown'
+    const showTutorial = ref(false)
+    const dontShowAgain = ref(false)
+    
+    // 检查是否应显示教程
+    onMounted(() => {
+      try {
+        const tutorialShown = localStorage.getItem(tutorialKey)
+        if (!tutorialShown) {
+          showTutorial.value = true
+        }
+      } catch (e) {
+        console.error('无法访问本地存储:', e)
+        showTutorial.value = true
+      }
+    })
     
     // 计算属性
     const currentLevel = computed(() => gameStore.getCurrentLevel)
@@ -630,6 +689,20 @@ export default {
       router.push('/game/levels')
     }
     
+    // 关闭教程
+    const dismissTutorial = () => {
+      showTutorial.value = false;
+      
+      // 保存用户不再显示的选择
+      if (dontShowAgain.value) {
+        try {
+          localStorage.setItem(tutorialKey, 'true');
+        } catch (e) {
+          console.error('无法保存到本地存储:', e);
+        }
+      }
+    }
+    
     return {
       loading,
       currentLevel,
@@ -663,7 +736,10 @@ export default {
       viewSummary,
       exitGame,
       identifyPhishingPrompt,
-      goToLevels
+      goToLevels,
+      showTutorial,
+      dontShowAgain,
+      dismissTutorial
     }
   }
 }
@@ -671,22 +747,26 @@ export default {
 
 <style scoped>
 .game-play-container {
-  width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #f3f2f1;
+  height: 100vh;
   overflow: hidden;
+  position: relative;
+  background-color: transparent;
+  z-index: 1;
 }
 
 /* Outlook 顶部导航栏 */
 .outlook-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   height: 48px;
   padding: 0 16px;
-  background-color: #0078d4;
+  background-color: rgba(0, 120, 212, 0.85);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   color: white;
+  z-index: 2;
 }
 
 .outlook-logo {
@@ -727,9 +807,10 @@ export default {
 
 /* Outlook 工具栏 */
 .outlook-toolbar {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.95);
   border-bottom: 1px solid #e1dfdd;
   padding: 0 16px;
+  z-index: 2;
 }
 
 .toolbar-tabs {
@@ -796,28 +877,26 @@ export default {
 
 /* 邮箱客户端 */
 .email-client {
-  flex: 1;
   display: flex;
+  flex: 1;
   overflow: hidden;
-  margin: 0 16px 16px;
-  background-color: white;
-  box-shadow: 0 1.6px 3.6px 0 rgba(0,0,0,0.1);
 }
 
-/* 侧边栏 */
 .sidebar {
-  width: 240px;
-  border-right: 1px solid #e1dfdd;
+  width: 250px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  border-right: 1px solid rgba(225, 223, 221, 0.6);
 }
 
 .user-profile {
   display: flex;
   align-items: center;
   padding: 16px;
-  border-bottom: 1px solid #e1dfdd;
+  border-bottom: 1px solid rgba(225, 223, 221, 0.6);
 }
 
 .avatar {
@@ -866,29 +945,67 @@ export default {
 .folder {
   display: flex;
   align-items: center;
-  padding: 8px 16px;
+  padding: 12px 20px;
   cursor: pointer;
   color: #616161;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition: all 0.3s ease;
   position: relative;
+  border: 2px solid transparent;
+  overflow: hidden;
+  height: 48px;
+  margin-bottom: 2px;
 }
 
 .folder:hover {
-  background-color: #f3f2f1;
+  background-color: rgba(243, 242, 241, 0.7);
   transform: translateY(-1px);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
+.folder[data-folder="inbox"],
+.folder[data-folder="trash"] {
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+  animation: subtle-highlight 3s infinite alternate;
+}
+
+.folder[data-folder="inbox"] {
+  border-left-color: #0078d4;
+}
+
+.folder[data-folder="trash"] {
+  border-left-color: #d13438;
+}
+
+@keyframes subtle-highlight {
+  0% { border-left-width: 3px; }
+  100% { border-left-width: 5px; }
+}
+
 .folder.active {
-  background-color: #c7e0f4;
+  background-color: rgba(199, 224, 244, 0.8);
   color: #0078d4;
   font-weight: 500;
 }
 
 .folder.drag-over {
-  background-color: #c7e0f4;
+  background-color: rgba(0, 120, 212, 0.15);
   border: 2px dashed #0078d4;
   transform: scale(1.02);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: folderPulse 1.5s infinite;
+}
+
+@keyframes folderPulse {
+  0% {
+    background-color: rgba(0, 120, 212, 0.05);
+  }
+  50% {
+    background-color: rgba(0, 120, 212, 0.2);
+  }
+  100% {
+    background-color: rgba(0, 120, 212, 0.05);
+  }
 }
 
 .folder i {
@@ -913,6 +1030,17 @@ export default {
 .email-content-wrapper {
   flex: 1;
   display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 16px 16px;
+}
+
+.email-container {
+  width: 360px;
+  border-right: 1px solid #e1dfdd;
+  display: flex;
   flex-direction: column;
   overflow: hidden;
 }
@@ -936,16 +1064,16 @@ export default {
 }
 
 .email-list {
-  width: 360px;
-  border-right: 1px solid #e1dfdd;
   overflow-y: auto;
   height: 100%;
 }
 
 .content-area {
   flex: 1;
-  padding: 16px;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
+  background-color: #fff;
 }
 
 /* 邮件列表动画效果 */
@@ -995,6 +1123,7 @@ export default {
   padding: 8px 16px;
   background-color: #f9f8f7;
   border-bottom: 1px solid #edebe9;
+  width: 100%;
 }
 
 .toolbar-actions {
@@ -1073,5 +1202,370 @@ export default {
   font-size: 14px;
   font-weight: bold;
   margin-left: 16px;
+}
+
+/* 教程遮罩层 */
+.tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tutorial-content {
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+  max-width: 500px;
+  max-height: 90%;
+  overflow: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: tutorialFadeIn 0.5s ease;
+  z-index: 1000;
+}
+
+@keyframes tutorialFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tutorial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.tutorial-title {
+  font-weight: 600;
+}
+
+.tutorial-close {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tutorial-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tutorial-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tutorial-animation {
+  position: relative;
+  width: 240px;
+  height: 120px;
+  margin-bottom: 16px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.animation-email {
+  position: absolute;
+  width: 60px;
+  height: 40px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  left: 30px;
+  top: 40px;
+  animation: dragEmail 4s infinite;
+  z-index: 2;
+}
+
+.animation-email:before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 40px;
+  height: 3px;
+  background-color: #0078d4;
+  border-radius: 2px;
+  box-shadow: 0 8px 0 #0078d4, 0 16px 0 #0078d4;
+  opacity: 0.7;
+}
+
+.animation-folder {
+  position: absolute;
+  width: 50px;
+  height: 40px;
+  background-color: rgba(0, 120, 212, 0.1);
+  border: 2px dashed #0078d4;
+  border-radius: 4px;
+  right: 30px;
+  top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: pulseFolder 2s infinite;
+}
+
+.animation-folder:before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border-radius: 2px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%230078d4"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.8;
+}
+
+.animation-arrow {
+  position: absolute;
+  width: 80px;
+  height: 3px;
+  background-color: #0078d4;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: showArrow 4s infinite;
+}
+
+.animation-arrow:after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: -5px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid #0078d4;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+@keyframes dragEmail {
+  0%, 15% {
+    transform: translateX(0) scale(1);
+  }
+  20%, 45% {
+    transform: translateX(120px) scale(0.9);
+  }
+  50%, 75% {
+    transform: translateX(0) scale(1);
+  }
+  80%, 95% {
+    transform: translateX(120px) scale(0.9);
+  }
+  100% {
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes pulseFolder {
+  0%, 100% {
+    background-color: rgba(0, 120, 212, 0.1);
+    transform: scale(1);
+  }
+  50% {
+    background-color: rgba(0, 120, 212, 0.2);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes showArrow {
+  0%, 15% {
+    opacity: 0;
+  }
+  20%, 45% {
+    opacity: 1;
+  }
+  50%, 75% {
+    opacity: 0;
+  }
+  80%, 95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.tutorial-text {
+  text-align: center;
+}
+
+.tutorial-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.tutorial-close {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* 新增样式 */
+.disabled-button {
+  opacity: 0.6;
+  cursor: not-allowed !important;
+  color: #909399 !important;
+  background-color: #f5f7fa !important;
+  border-color: #e4e7ed !important;
+}
+
+.operable-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.operable-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.operable-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.operable-button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.operable-button:hover::after {
+  transform: translateX(0);
+}
+
+.action-hint {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.operable-button:hover .action-hint {
+  opacity: 1;
+  bottom: -25px;
+}
+
+.folder-hint {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 2px 4px;
+  background-color: rgba(0, 120, 212, 0.1);
+  color: #0078d4;
+  border-radius: 2px 0 0 0;
+  font-size: 10px;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.3s ease;
+}
+
+.operable-folder:hover .folder-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.button-action-hint {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.operable-button:hover .button-action-hint {
+  opacity: 1;
+  top: -20px;
+}
+
+.non-interactive {
+  opacity: 0.6;
+  cursor: default !important;
+  color: #909399;
+  background-color: #f5f7fa;
+}
+
+/* 添加高亮呼吸效果 */
+.operable-folder {
+  position: relative;
+}
+
+.operable-folder::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 120, 212, 0.05);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.operable-folder:hover::before {
+  opacity: 1;
+  animation: breatheEffect 2s infinite;
+}
+
+@keyframes breatheEffect {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+.email-button.disabled {
+  pointer-events: none;
+  opacity: 0.7;
 }
 </style> 
