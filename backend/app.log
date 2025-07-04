@@ -357,3 +357,7 @@
 2025-07-04 02:12:51,164 - app.routers.admin - INFO - 管理员 admin 请求邮件错误率统计
 2025-07-04 02:13:10,037 - app.routers.auth - INFO - 用户登录请求: admin
 2025-07-04 02:13:10,243 - app.routers.auth - INFO - 用户登录成功: admin, 是管理员=True
+2025-07-04 14:32:58,861 - __main__ - INFO - 启动 钓鱼邮件识别教学游戏 v1.0.0
+2025-07-04 14:32:58,861 - __main__ - INFO - 数据库URL: sqlite:///../sql_app.db
+2025-07-04 14:32:58,861 - __main__ - INFO - 服务器配置: host=0.0.0.0, port=8000, reload=True
+2025-07-04 14:32:58,861 - __main__ - INFO - 启动服务器...

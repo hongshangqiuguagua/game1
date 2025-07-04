@@ -133,118 +133,118 @@
     
     <div class="email-client" v-if="!loading">
       <div class="sidebar">
-        <div class="user-profile">
-          <div class="avatar">{{ getCurrentUserInitial() }}</div>
-          <div class="user-info">
-            <div class="username">当前用户</div>
-            <div class="email">user@example.com</div>
+          <div class="user-profile">
+            <div class="avatar">{{ getCurrentUserInitial() }}</div>
+            <div class="user-info">
+              <div class="username">当前用户</div>
+              <div class="email">user@example.com</div>
+            </div>
           </div>
-        </div>
-        
-        <div class="folder-header">收藏夹</div>
-        <div 
-          class="folder" 
+          
+          <div class="folder-header">收藏夹</div>
+          <div 
+            class="folder" 
           :class="{ active: currentView === 'inbox', 'drag-over': isDragOverInbox, 'operable-folder': true }"
-          data-folder="inbox"
-          @click="switchView('inbox')"
-          @dragover="handleDragOverInbox"
-          @dragleave="handleDragLeaveInbox"
-          @drop="handleDropToInbox"
-        >
-          <el-icon><el-icon-message /></el-icon>
-          <span>收件箱</span>
-          <span class="count" v-if="inboxEmails.length > 0">{{ inboxEmails.length }}</span>
+            data-folder="inbox"
+            @click="switchView('inbox')"
+            @dragover="handleDragOverInbox"
+            @dragleave="handleDragLeaveInbox"
+            @drop="handleDropToInbox"
+          >
+            <el-icon><el-icon-message /></el-icon>
+            <span>收件箱</span>
+            <span class="count" v-if="inboxEmails.length > 0">{{ inboxEmails.length }}</span>
           <div class="folder-hint" v-if="currentView !== 'inbox'">可拖放区域</div>
-        </div>
+          </div>
         <div class="folder non-interactive">
-          <el-icon><el-icon-star /></el-icon>
-          <span>已加星标</span>
-        </div>
-        
-        <div class="folder-header">文件夹</div>
-        <div 
-          class="folder" 
+            <el-icon><el-icon-star /></el-icon>
+            <span>已加星标</span>
+          </div>
+          
+          <div class="folder-header">文件夹</div>
+          <div 
+            class="folder" 
           :class="{ active: currentView === 'trash', 'drag-over': isDragOverTrash, 'operable-folder': true }" 
-          data-folder="trash" 
-          @click="switchView('trash')"
-          @dragover="handleDragOverTrash" 
-          @dragleave="handleDragLeaveTrash" 
-          @drop="handleDropToTrash"
-        >
-          <el-icon><el-icon-delete /></el-icon>
-          <span>垃圾桶</span>
-          <span class="count" v-if="trashEmails.length > 0">{{ trashEmails.length }}</span>
+            data-folder="trash" 
+            @click="switchView('trash')"
+            @dragover="handleDragOverTrash" 
+            @dragleave="handleDragLeaveTrash" 
+            @drop="handleDropToTrash"
+          >
+            <el-icon><el-icon-delete /></el-icon>
+            <span>垃圾桶</span>
+            <span class="count" v-if="trashEmails.length > 0">{{ trashEmails.length }}</span>
           <div class="folder-hint" v-if="currentView !== 'trash'">可拖放区域</div>
-        </div>
+          </div>
         <div class="folder non-interactive">
-          <el-icon><el-icon-position /></el-icon>
-          <span>已发送</span>
-        </div>
+            <el-icon><el-icon-position /></el-icon>
+            <span>已发送</span>
+          </div>
         <div class="folder non-interactive">
-          <el-icon><el-icon-document /></el-icon>
-          <span>草稿</span>
-        </div>
+            <el-icon><el-icon-document /></el-icon>
+            <span>草稿</span>
+          </div>
         <div class="folder non-interactive">
-          <el-icon><el-icon-folder /></el-icon>
-          <span>存档</span>
+            <el-icon><el-icon-folder /></el-icon>
+            <span>存档</span>
         </div>
       </div>
       
       <div class="email-content-wrapper">
         <div class="email-container">
-          <div class="email-list-header">
-            <div class="list-title">{{ currentView === 'inbox' ? '收件箱' : '垃圾桶' }}</div>
-            <div class="list-actions">
-              <el-tooltip content="刷新" placement="bottom">
-                <el-icon class="action-icon"><el-icon-refresh /></el-icon>
-              </el-tooltip>
-              <el-tooltip content="排序" placement="bottom">
-                <el-icon class="action-icon"><el-icon-sort /></el-icon>
-              </el-tooltip>
-              <el-tooltip content="更多操作" placement="bottom">
-                <el-icon class="action-icon"><el-icon-more /></el-icon>
-              </el-tooltip>
-            </div>
+        <div class="email-list-header">
+          <div class="list-title">{{ currentView === 'inbox' ? '收件箱' : '垃圾桶' }}</div>
+          <div class="list-actions">
+            <el-tooltip content="刷新" placement="bottom">
+              <el-icon class="action-icon"><el-icon-refresh /></el-icon>
+            </el-tooltip>
+            <el-tooltip content="排序" placement="bottom">
+              <el-icon class="action-icon"><el-icon-sort /></el-icon>
+            </el-tooltip>
+            <el-tooltip content="更多操作" placement="bottom">
+              <el-icon class="action-icon"><el-icon-more /></el-icon>
+            </el-tooltip>
           </div>
+        </div>
+        
+        <div class="email-list">
+          <!-- 收件箱视图 -->
+          <template v-if="currentView === 'inbox' && inboxEmails.length > 0">
+            <TransitionGroup name="email-list" tag="div" class="email-list-container">
+            <EmailItem
+              v-for="email in inboxEmails"
+              :key="email.id"
+              :email="email"
+              :is-read="isEmailRead(email.id)"
+              :is-selected="selectedEmail && selectedEmail.id === email.id"
+              @click="selectEmail(email.id)"
+                @dragstart="handleDragStart($event, email.id)"
+            />
+            </TransitionGroup>
+          </template>
           
-          <div class="email-list">
-            <!-- 收件箱视图 -->
-            <template v-if="currentView === 'inbox' && inboxEmails.length > 0">
-              <TransitionGroup name="email-list" tag="div" class="email-list-container">
+          <!-- 垃圾箱视图 -->
+          <template v-else-if="currentView === 'trash' && trashEmails.length > 0">
+            <TransitionGroup name="email-list" tag="div" class="email-list-container">
               <EmailItem
-                v-for="email in inboxEmails"
+                v-for="email in trashEmails"
                 :key="email.id"
                 :email="email"
                 :is-read="isEmailRead(email.id)"
                 :is-selected="selectedEmail && selectedEmail.id === email.id"
+                :is-in-trash="true"
                 @click="selectEmail(email.id)"
-                  @dragstart="handleDragStart($event, email.id)"
+                @dragstart="handleDragStart($event, email.id)"
+                @restore="restoreFromTrash"
               />
-              </TransitionGroup>
-            </template>
-            
-            <!-- 垃圾箱视图 -->
-            <template v-else-if="currentView === 'trash' && trashEmails.length > 0">
-              <TransitionGroup name="email-list" tag="div" class="email-list-container">
-                <EmailItem
-                  v-for="email in trashEmails"
-                  :key="email.id"
-                  :email="email"
-                  :is-read="isEmailRead(email.id)"
-                  :is-selected="selectedEmail && selectedEmail.id === email.id"
-                  :is-in-trash="true"
-                  @click="selectEmail(email.id)"
-                  @dragstart="handleDragStart($event, email.id)"
-                  @restore="restoreFromTrash"
-                />
-              </TransitionGroup>
-            </template>
-            
-            <el-empty v-else :description="currentView === 'inbox' ? '收件箱为空' : '垃圾桶为空'"></el-empty>
+            </TransitionGroup>
+          </template>
+          
+          <el-empty v-else :description="currentView === 'inbox' ? '收件箱为空' : '垃圾桶为空'"></el-empty>
           </div>
-        </div>
-        
-        <div class="content-area">
+      </div>
+      
+      <div class="content-area">
           <div v-if="selectedEmail" class="content-toolbar">
             <div class="toolbar-actions">
               <el-tooltip content="回复" placement="bottom">
@@ -273,7 +273,7 @@
               </template>
             </div>
           </div>
-          <EmailContent :email="selectedEmail" />
+        <EmailContent :email="selectedEmail" />
         </div>
       </div>
     </div>
