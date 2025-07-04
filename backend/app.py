@@ -15,13 +15,18 @@ sys.path.append(current_dir)
 
 from app import __version__, config
 
+# 确保logs目录存在
+logs_dir = os.path.join(os.path.dirname(current_dir), "logs")
+if not os.path.exists(logs_dir):
+    os.makedirs(logs_dir)
+
 # 配置日志
 logging.basicConfig(
     level=getattr(logging, config.LOG_LEVEL),
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler("app.log", encoding='utf-8')
+        logging.FileHandler(os.path.join(logs_dir, "app.log"), encoding='utf-8')
     ]
 )
 logger = logging.getLogger(__name__)

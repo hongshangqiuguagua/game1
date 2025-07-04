@@ -3,12 +3,26 @@ import os
 import sys
 
 # 将 'backend' 目录添加到 Python 路径中，以便可以找到 'app' 模块
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+backend_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(backend_dir)
+
+# 确保logs目录存在
+logs_dir = os.path.join(os.path.dirname(backend_dir), "logs")
+if not os.path.exists(logs_dir):
+    os.makedirs(logs_dir)
 
 from app.database import engine, Base, SessionLocal
 from app.data.init import init_database
 
-logging.basicConfig(level=logging.INFO)
+# 配置日志
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler(os.path.join(logs_dir, "init_db.log"), encoding='utf-8')
+    ]
+)
 logger = logging.getLogger(__name__)
 
 def setup_database():

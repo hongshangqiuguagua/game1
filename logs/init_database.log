@@ -1,0 +1,93 @@
+C:\Users\cjw11\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\pydantic\_internal\_config.py:322: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+2025-07-04 18:38:34,699 - __main__ - INFO - --- 开始设置数据库 ---
+2025-07-04 18:38:34,699 - __main__ - INFO - 正在删除所有旧表...
+2025-07-04 18:38:34,779 - __main__ - INFO - 正在创建所有新表...
+2025-07-04 18:38:34,925 - __main__ - INFO - --- 数据库表已创建 ---
+2025-07-04 18:38:34,925 - __main__ - INFO - --- 开始填充数据库 ---
+2025-07-04 18:38:34,945 - app.data.init - INFO - 未找到管理员账户，正在创建...
+2025-07-04 18:38:35,189 - app.data.init - INFO - 管理员用户创建成功
+2025-07-04 18:38:35,209 - app.crud.level - INFO - 创建了新关卡: 初级挑战 (order: 1)
+2025-07-04 18:38:35,209 - app.data.init - INFO - 关卡 '初级挑战' 创建成功
+2025-07-04 18:38:35,219 - app.crud.email - INFO - 创建了新邮件: 您的账户已被锁定 (level_id: 1)
+2025-07-04 18:38:35,219 - app.data.init - INFO - 邮件 '您的账户已被锁定' 创建成功
+2025-07-04 18:38:35,239 - app.crud.email - INFO - 创建了新邮件: 本周新闻简报 (level_id: 1)
+2025-07-04 18:38:35,239 - app.data.init - INFO - 邮件 '本周新闻简报' 创建成功
+2025-07-04 18:38:35,269 - app.crud.email - INFO - 创建了新邮件: 您的订单发货通知 (level_id: 1)
+2025-07-04 18:38:35,269 - app.data.init - INFO - 邮件 '您的订单发货通知' 创建成功
+2025-07-04 18:38:35,290 - app.crud.email - INFO - 创建了新邮件: 今日天气预报 (level_id: 1)
+2025-07-04 18:38:35,290 - app.data.init - INFO - 邮件 '今日天气预报' 创建成功
+2025-07-04 18:38:35,303 - app.crud.email - INFO - 创建了新邮件: 您有5条未读消息 (level_id: 1)
+2025-07-04 18:38:35,303 - app.data.init - INFO - 邮件 '您有5条未读消息' 创建成功
+2025-07-04 18:38:35,309 - app.crud.email - INFO - 创建了新邮件: eBay购物小贴士 (level_id: 1)
+2025-07-04 18:38:35,309 - app.data.init - INFO - 邮件 'eBay购物小贴士' 创建成功
+2025-07-04 18:38:35,330 - app.crud.level - INFO - 创建了新关卡: 中级挑战 (order: 2)
+2025-07-04 18:38:35,330 - app.data.init - INFO - 关卡 '中级挑战' 创建成功
+2025-07-04 18:38:35,350 - app.crud.email - INFO - 创建了新邮件: 您的Microsoft账户需要更新 (level_id: 2)
+2025-07-04 18:38:35,350 - app.data.init - INFO - 邮件 '您的Microsoft账户需要更新' 创建成功
+2025-07-04 18:38:35,360 - app.crud.email - INFO - 创建了新邮件: 您的Amazon订单确认 #123-4567890 (level_id: 2)
+2025-07-04 18:38:35,360 - app.data.init - INFO - 邮件 '您的Amazon订单确认 #123-4567890' 创建成功
+2025-07-04 18:38:35,380 - app.crud.email - INFO - 创建了新邮件: 您的付款已处理 (level_id: 2)
+2025-07-04 18:38:35,380 - app.data.init - INFO - 邮件 '您的付款已处理' 创建成功
+2025-07-04 18:38:35,390 - app.crud.email - INFO - 创建了新邮件: 本周音乐推荐 (level_id: 2)
+2025-07-04 18:38:35,390 - app.data.init - INFO - 邮件 '本周音乐推荐' 创建成功
+2025-07-04 18:38:35,400 - app.crud.email - INFO - 创建了新邮件: 重要：您的银行账户异常活动 (level_id: 2)
+2025-07-04 18:38:35,410 - app.data.init - INFO - 邮件 '重要：您的银行账户异常活动' 创建成功
+2025-07-04 18:38:35,420 - app.crud.email - INFO - 创建了新邮件: 纽约时报：每日头条新闻 (level_id: 2)
+2025-07-04 18:38:35,420 - app.data.init - INFO - 邮件 '纽约时报：每日头条新闻' 创建成功
+2025-07-04 18:38:35,440 - app.crud.email - INFO - 创建了新邮件: 恭喜！您赢得了100万美元大奖 (level_id: 2)
+2025-07-04 18:38:35,440 - app.data.init - INFO - 邮件 '恭喜！您赢得了100万美元大奖' 创建成功
+2025-07-04 18:38:35,449 - app.crud.level - INFO - 创建了新关卡: 高级挑战 (order: 3)
+2025-07-04 18:38:35,449 - app.data.init - INFO - 关卡 '高级挑战' 创建成功
+2025-07-04 18:38:35,469 - app.crud.email - INFO - 创建了新邮件: 您的账户需要验证 (level_id: 3)
+2025-07-04 18:38:35,469 - app.data.init - INFO - 邮件 '您的账户需要验证' 创建成功
+2025-07-04 18:38:35,480 - app.crud.email - INFO - 创建了新邮件: 您的Apple ID已在新设备上登录 (level_id: 3)
+2025-07-04 18:38:35,480 - app.data.init - INFO - 邮件 '您的Apple ID已在新设备上登录' 创建成功
+2025-07-04 18:38:35,500 - app.crud.email - INFO - 创建了新邮件: 您的共享文档已更新 (level_id: 3)
+2025-07-04 18:38:35,500 - app.data.init - INFO - 邮件 '您的共享文档已更新' 创建成功
+2025-07-04 18:38:35,520 - app.crud.email - INFO - 创建了新邮件: 您的Netflix账户支付失败 (level_id: 3)
+2025-07-04 18:38:35,520 - app.data.init - INFO - 邮件 '您的Netflix账户支付失败' 创建成功
+2025-07-04 18:38:35,530 - app.crud.email - INFO - 创建了新邮件: 您有5个新的工作推荐 (level_id: 3)
+2025-07-04 18:38:35,540 - app.data.init - INFO - 邮件 '您有5个新的工作推荐' 创建成功
+2025-07-04 18:38:35,550 - app.crud.email - INFO - 创建了新邮件: 您的DHL包裹已延迟 (level_id: 3)
+2025-07-04 18:38:35,550 - app.data.init - INFO - 邮件 '您的DHL包裹已延迟' 创建成功
+2025-07-04 18:38:35,570 - app.crud.email - INFO - 创建了新邮件: Zoom会议记录已就绪 (level_id: 3)
+2025-07-04 18:38:35,570 - app.data.init - INFO - 邮件 'Zoom会议记录已就绪' 创建成功
+2025-07-04 18:38:35,590 - app.crud.level - INFO - 创建了新关卡: 专家挑战 (order: 4)
+2025-07-04 18:38:35,590 - app.data.init - INFO - 关卡 '专家挑战' 创建成功
+2025-07-04 18:38:35,610 - app.crud.email - INFO - 创建了新邮件: 员工福利政策更新 - 需要确认 (level_id: 4)
+2025-07-04 18:38:35,610 - app.data.init - INFO - 邮件 '员工福利政策更新 - 需要确认' 创建成功
+2025-07-04 18:38:35,620 - app.crud.email - INFO - 创建了新邮件: Google安全警报 - 账户恢复选项已更新 (level_id: 4)
+2025-07-04 18:38:35,620 - app.data.init - INFO - 邮件 'Google安全警报 - 账户恢复选项已更新' 创建成功
+2025-07-04 18:38:35,640 - app.crud.email - INFO - 创建了新邮件: 【重要】您的银行账户安全警告 (level_id: 4)
+2025-07-04 18:38:35,640 - app.data.init - INFO - 邮件 '【重要】您的银行账户安全警告' 创建成功
+2025-07-04 18:38:35,660 - app.crud.email - INFO - 创建了新邮件: 紧急：公司VPN访问凭证重置 (level_id: 4)
+2025-07-04 18:38:35,660 - app.data.init - INFO - 邮件 '紧急：公司VPN访问凭证重置' 创建成功
+2025-07-04 18:38:35,680 - app.crud.email - INFO - 创建了新邮件: 您的订单 #203-7654321-1234567 已发货 (level_id: 4)
+2025-07-04 18:38:35,680 - app.data.init - INFO - 邮件 '您的订单 #203-7654321-1234567 已发货' 创建成功
+2025-07-04 18:38:35,690 - app.crud.email - INFO - 创建了新邮件: 财务合同等待您签署 - 请尽快处理 (level_id: 4)
+2025-07-04 18:38:35,690 - app.data.init - INFO - 邮件 '财务合同等待您签署 - 请尽快处理' 创建成功
+2025-07-04 18:38:35,710 - app.crud.email - INFO - 创建了新邮件: 您的酒店预订确认 #MR123456789 (level_id: 4)
+2025-07-04 18:38:35,710 - app.data.init - INFO - 邮件 '您的酒店预订确认 #MR123456789' 创建成功
+2025-07-04 18:38:35,730 - app.crud.level - INFO - 创建了新关卡: 社交媒体钓鱼挑战 (order: 5)
+2025-07-04 18:38:35,730 - app.data.init - INFO - 关卡 '社交媒体钓鱼挑战' 创建成功
+2025-07-04 18:38:35,751 - app.crud.email - INFO - 创建了新邮件: 【微信安全中心】您的账号存在异常登录 (level_id: 5)
+2025-07-04 18:38:35,751 - app.data.init - INFO - 邮件 '【微信安全中心】您的账号存在异常登录' 创建成功
+2025-07-04 18:38:35,761 - app.crud.email - INFO - 创建了新邮件: 您的抖音视频获得官方推荐 (level_id: 5)
+2025-07-04 18:38:35,761 - app.data.init - INFO - 邮件 '您的抖音视频获得官方推荐' 创建成功
+2025-07-04 18:38:35,781 - app.crud.email - INFO - 创建了新邮件: TikTok Security: New Login Alert (level_id: 5)
+2025-07-04 18:38:35,781 - app.data.init - INFO - 邮件 'TikTok Security: New Login Alert' 创建成功
+2025-07-04 18:38:35,801 - app.crud.email - INFO - 创建了新邮件: 您有5条未读消息和3个新的职位推荐 (level_id: 5)
+2025-07-04 18:38:35,801 - app.data.init - INFO - 邮件 '您有5条未读消息和3个新的职位推荐' 创建成功
+2025-07-04 18:38:35,816 - app.crud.email - INFO - 创建了新邮件: Instagram: 您的账号已被举报违规 (level_id: 5)
+2025-07-04 18:38:35,816 - app.data.init - INFO - 邮件 'Instagram: 您的账号已被举报违规' 创建成功
+2025-07-04 18:38:35,821 - app.crud.email - INFO - 创建了新邮件: 恭喜您获得小红书品牌合作机会 (level_id: 5)
+2025-07-04 18:38:35,821 - app.data.init - INFO - 邮件 '恭喜您获得小红书品牌合作机会' 创建成功
+2025-07-04 18:38:35,841 - app.crud.email - INFO - 创建了新邮件: 知乎：您的回答获得官方推荐 (level_id: 5)
+2025-07-04 18:38:35,841 - app.data.init - INFO - 邮件 '知乎：您的回答获得官方推荐' 创建成功
+2025-07-04 18:38:35,851 - app.crud.email - INFO - 创建了新邮件: 【哔哩哔哩】您的账号可能存在安全风险 (level_id: 5)
+2025-07-04 18:38:35,851 - app.data.init - INFO - 邮件 '【哔哩哔哩】您的账号可能存在安全风险' 创建成功
+2025-07-04 18:38:35,851 - app.data.init - INFO - 示例数据初始化完成
+2025-07-04 18:38:35,851 - __main__ - INFO - --- 数据库填充完成 ---
+2025-07-04 18:38:35,851 - __main__ - INFO - --- 数据库设置成功 ---

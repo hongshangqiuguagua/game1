@@ -1,0 +1,35 @@
+2025-07-04 18:38:47,919 - __main__ - INFO - 启动 钓鱼邮件识别教学游戏 v1.0.0
+2025-07-04 18:38:47,919 - __main__ - INFO - 数据库URL: sqlite:///../sql_app.db
+2025-07-04 18:38:47,919 - __main__ - INFO - 服务器配置: host=0.0.0.0, port=8000, reload=True
+2025-07-04 18:38:47,919 - __main__ - INFO - 启动服务器...
+2025-07-04 18:42:35,801 - __main__ - INFO - 启动 钓鱼邮件识别教学游戏 v1.0.0
+2025-07-04 18:42:35,801 - __main__ - INFO - 数据库URL: sqlite:///../sql_app.db
+2025-07-04 18:42:35,801 - __main__ - INFO - 服务器配置: host=0.0.0.0, port=8000, reload=True
+2025-07-04 18:42:35,801 - __main__ - INFO - 启动服务器...
+2025-07-04 18:45:42,260 - __main__ - INFO - 启动 钓鱼邮件识别教学游戏 v1.0.0
+2025-07-04 18:45:42,260 - __main__ - INFO - 数据库URL: sqlite:///../sql_app.db
+2025-07-04 18:45:42,260 - __main__ - INFO - 服务器配置: host=0.0.0.0, port=8000, reload=True
+2025-07-04 18:45:42,260 - __main__ - INFO - 启动服务器...
+2025-07-04 18:45:54,140 - __main__ - INFO - 启动 钓鱼邮件识别教学游戏 v1.0.0
+2025-07-04 18:45:54,140 - __main__ - INFO - 数据库URL: sqlite:///../sql_app.db
+2025-07-04 18:45:54,140 - __main__ - INFO - 服务器配置: host=0.0.0.0, port=8000, reload=True
+2025-07-04 18:45:54,140 - __main__ - INFO - 启动服务器...
+2025-07-04 18:46:37,474 - app.routers.game - INFO - 用户 admin 提交关卡 1 的结果
+2025-07-04 18:46:37,561 - app.crud.player_record - INFO - 创建了玩家记录: user_id=1, level_id=1, score=3/6
+2025-07-04 18:46:37,561 - app.routers.game - INFO - 用户 admin 完成关卡 1，得分: 3/6
+2025-07-04 18:46:41,090 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:46:41,092 - app.routers.admin - INFO - 管理员请求获取所有关卡
+2025-07-04 18:46:42,062 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:46:42,062 - app.routers.admin - INFO - 管理员 admin 请求邮件错误率统计
+2025-07-04 18:47:01,658 - app.routers.game - INFO - 用户 admin 提交关卡 5 的结果
+2025-07-04 18:47:01,725 - app.crud.player_record - INFO - 创建了玩家记录: user_id=1, level_id=5, score=5/8
+2025-07-04 18:47:01,725 - app.routers.game - INFO - 用户 admin 完成关卡 5，得分: 5/8
+2025-07-04 18:47:13,396 - app.routers.game - INFO - 用户 admin 提交关卡 5 的结果
+2025-07-04 18:47:13,474 - app.crud.player_record - INFO - 创建了玩家记录: user_id=1, level_id=5, score=4/8
+2025-07-04 18:47:13,475 - app.routers.game - INFO - 用户 admin 完成关卡 5，得分: 4/8
+2025-07-04 18:47:24,243 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:47:24,243 - app.routers.admin - INFO - 管理员请求获取所有关卡
+2025-07-04 18:47:25,254 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:47:25,255 - app.routers.admin - INFO - 管理员 admin 请求邮件错误率统计
+2025-07-04 18:47:37,176 - app.routers.auth - INFO - 用户登录请求: admin
+2025-07-04 18:47:37,591 - app.routers.auth - INFO - 用户登录成功: admin, 是管理员=True
