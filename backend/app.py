@@ -8,6 +8,11 @@ import uvicorn
 import logging
 import os
 import sys
+
+# 确保app模块可以被正确导入
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(current_dir)
+
 from app import __version__, config
 
 # 配置日志
@@ -49,13 +54,23 @@ def main():
     logger.info("启动服务器...")
     
     # 启动服务器
-    uvicorn.run(
-        "app.main:app",
-        host=host,
-        port=port,
-        reload=reload,
-        log_level=config.LOG_LEVEL.lower()
-    )
+    try:
+        uvicorn.run(
+            "app.main:app",
+            host=host,
+            port=port,
+            reload=reload,
+            log_level=config.LOG_LEVEL.lower()
+        )
+    except Exception as e:
+        logger.error(f"启动服务器时发生错误: {e}")
+        input("按Enter键继续...")
+        raise
 
 if __name__ == "__main__":
-    main() 
+    try:
+        main()
+    except Exception as e:
+        logger.error(f"程序运行失败: {e}")
+        input("按Enter键退出...")
+        sys.exit(1) 

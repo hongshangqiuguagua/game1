@@ -40,6 +40,32 @@ def get_sample_levels() -> List[Dict[str, Any]]:
                     "subject": "本周新闻简报",
                     "content": "尊敬的用户，\n\n感谢您订阅我们的周报。以下是本周的热门新闻：\n\n1. 公司推出新产品\n2. 行业动态分析\n3. 用户反馈调查\n\n如果您有任何问题，请回复此邮件。\n\n祝好，\n公司团队",
                     "is_phishing": False
+                },
+                {
+                    "sender": "service@arnaz0n.com",
+                    "subject": "您的订单发货通知",
+                    "content": "尊敬的顾客，\n\n感谢您在亚马逊购物！您的订单#12345已经发货。\n\n由于系统升级，我们需要您确认收货地址，请点击以下链接确认：\n[确认地址](http://amazon-verify.net/address)\n\n如不确认，您的包裹可能会被退回。\n\n亚马逊客户服务",
+                    "is_phishing": True,
+                    "phishing_clue": "发件人域名拼写错误：arnaz0n.com（正确应为amazon.com），且链接指向非官方网站。"
+                },
+                {
+                    "sender": "info@weather.com",
+                    "subject": "今日天气预报",
+                    "content": "早上好！\n\n今天的天气预报：\n- 温度: 25°C\n- 天气: 晴朗\n- 湿度: 45%\n- 风速: 10km/h\n\n祝您有愉快的一天！\n\nWeather.com团队",
+                    "is_phishing": False
+                },
+                {
+                    "sender": "notifications@faceb00k.com",
+                    "subject": "您有5条未读消息",
+                    "content": "您好，\n\n您的Facebook账号有5条未读消息和3个好友请求。\n\n请点击以下链接查看：\n[查看消息](http://faceb00k-login.com)\n\n如您近期未登录，请尽快处理以免错过重要通知。\n\nFacebook团队",
+                    "is_phishing": True,
+                    "phishing_clue": "发件人域名中的'o'被'0'替换（faceb00k.com而不是facebook.com）；链接指向钓鱼网站。"
+                },
+                {
+                    "sender": "help@ebay.com",
+                    "subject": "eBay购物小贴士",
+                    "content": "亲爱的eBay用户，\n\n以下是本月热门商品推荐：\n\n1. 电子产品特惠\n2. 家居用品折扣\n3. 收藏品拍卖\n\n登录您的账号查看更多个性化推荐。\n\n谢谢！\neBay购物团队",
+                    "is_phishing": False
                 }
             ]
         },
@@ -61,6 +87,39 @@ def get_sample_levels() -> List[Dict[str, Any]]:
                     "subject": "您的Amazon订单确认 #123-4567890",
                     "content": "您好，\n\n感谢您在Amazon的购物！您的订单 #123-4567890 已确认，预计将在3-5个工作日内送达。\n\n您可以随时查看订单状态：[查看订单](https://www.amazon.com/orders)\n\n谢谢！",
                     "is_phishing": False
+                },
+                {
+                    "sender": "payment-confirm@paypa1-service.com",
+                    "subject": "您的付款已处理",
+                    "content": "尊敬的用户，\n\n我们已处理您的付款：\n- 金额：$499.99\n- 收款方：Digital Electronics Store\n- 日期：2023年11月30日\n\n如果您不认识此交易，请点击以下链接取消：\n[取消交易](https://secure.paypa1-refunds.com)\n\n请在24小时内处理，否则无法退款。\n\nPayPal团队",
+                    "is_phishing": True,
+                    "phishing_clue": "发件人域名中的'l'被数字'1'替换，且域名结构不正确（应为paypal.com而不是paypa1-service.com）；制造紧急感要求立即行动。"
+                },
+                {
+                    "sender": "newsletter@spotify.com",
+                    "subject": "本周音乐推荐",
+                    "content": "嗨！\n\n根据您的听歌偏好，我们为您推荐以下播放列表：\n\n1. 周末放松曲目\n2. 工作效率提升\n3. 新歌首发\n\n打开Spotify应用查看完整推荐。\n\n享受美妙音乐！\nSpotify团队",
+                    "is_phishing": False
+                },
+                {
+                    "sender": "security@bankofamerica-secure.com",
+                    "subject": "重要：您的银行账户异常活动",
+                    "content": "尊敬的客户，\n\n我们检测到您的账户有异常活动，可能是未授权交易。\n\n为保护您的资金安全，请立即确认您的身份：\n[确认身份](https://bankofamerica-secure-login.com/verify)\n\n如不是您本人操作，请忽略此邮件并联系我们的客服热线。\n\n美国银行安全团队",
+                    "is_phishing": True,
+                    "phishing_clue": "发件人域名'bankofamerica-secure.com'不是美国银行的官方域名，正确的应该是'bankofamerica.com'；链接指向非官方网站，且试图制造紧急感。"
+                },
+                {
+                    "sender": "news@nytimes.com",
+                    "subject": "纽约时报：每日头条新闻",
+                    "content": "今日头条：\n\n1. 全球经济发展趋势分析\n2. 科技行业最新突破\n3. 健康与生活方式专题\n\n阅读完整报道，请访问我们的网站：\n[纽约时报](https://www.nytimes.com)\n\n感谢您的订阅！",
+                    "is_phishing": False
+                },
+                {
+                    "sender": "lottery@prize-notification.com",
+                    "subject": "恭喜！您赢得了100万美元大奖",
+                    "content": "亲爱的幸运儿，\n\n恭喜您！您的电子邮箱地址在我们的年度抽奖活动中被随机选中，获得了100万美元大奖！\n\n为了领取您的奖金，请填写以下表格：\n[领取奖金](http://prize-claim-center.com/form)\n\n您需要支付$500处理费用以完成奖金发放流程。\n\n请在48小时内回复，否则奖金将分配给下一位获奖者。\n\n国际彩票管理局",
+                    "is_phishing": True,
+                    "phishing_clue": "典型的彩票诈骗邮件，要求支付处理费用才能领取奖金，且发件人域名和链接都不可信；任何要求预付费用领取奖金的都是诈骗。"
                 }
             ]
         },
@@ -88,6 +147,32 @@ def get_sample_levels() -> List[Dict[str, Any]]:
                     "sender": "support@dropbox.com",
                     "subject": "您的共享文档已更新",
                     "content": "您好，\n\n您的团队成员已更新共享文档。\n\n文档名称：Q3财务报告.docx\n更新时间：2023年9月15日 10:45\n\n[查看更新](https://www.dropbox.com/documents/shared/finance)\n\n如果您无法访问该链接，请复制以下网址到浏览器地址栏：\nhttps://www.dropbox.com/documents/shared/finance\n\nDropbox 团队\n© 2023 Dropbox, Inc., 所有权利保留。",
+                    "is_phishing": False
+                },
+                {
+                    "sender": "noreply@netfl1x.com",
+                    "subject": "您的Netflix账户支付失败",
+                    "content": "亲爱的会员，\n\n我们无法处理您的最新Netflix订阅付款。您的账户将在24小时后暂停。\n\n为避免服务中断，请更新您的支付信息：\n[更新支付方式](https://accounts-netflix.secureupdate.com)\n\n如有任何问题，请联系客户服务。\n\nNetflix团队\n© 2023 Netflix, Inc. 保留所有权利。",
+                    "is_phishing": True,
+                    "phishing_clue": "发件人域名中的字母'i'被数字'1'替换（netfl1x而不是netflix）；链接指向非官方域名，不是netflix.com。"
+                },
+                {
+                    "sender": "notifications@linkedin.com",
+                    "subject": "您有5个新的工作推荐",
+                    "content": "您好，\n\n根据您的职业背景和偏好，我们为您找到了5个新的职位机会：\n\n1. 高级产品经理 - 科技公司\n2. 市场营销总监 - 电子商务\n3. UX设计师 - 软件开发\n\n查看所有推荐并申请：\n[查看工作机会](https://www.linkedin.com/jobs/view/)\n\nLinkedIn职业团队\n© 2023 LinkedIn Corporation, 保留所有权利。",
+                    "is_phishing": False
+                },
+                {
+                    "sender": "service@dhl-express.com",
+                    "subject": "您的DHL包裹已延迟",
+                    "content": "尊敬的客户，\n\n您的包裹(跟踪号：DHL7823456901)在配送过程中遇到了问题，需要您确认收货地址。\n\n为了确保您的包裹能够顺利送达，请通过以下链接确认您的详细信息：\n[确认收货信息](https://dhl-tracking-update.com/verify)\n\n如果您不立即确认，包裹将被退回发件人。\n\nDHL快递团队\n© 2023 DHL International GmbH",
+                    "is_phishing": True,
+                    "phishing_clue": "虽然发件人域名看起来像官方，但真正的DHL邮件来自dhl.com；链接指向非官方网站dhl-tracking-update.com；邮件试图制造紧急感。"
+                },
+                {
+                    "sender": "no-reply@zoom.us",
+                    "subject": "Zoom会议记录已就绪",
+                    "content": "您好，\n\n您的Zoom会议\"项目讨论\"的录制内容现已可供查看。\n\n会议日期：2023年10月18日\n时长：58分钟\n\n您可以通过以下链接查看和下载会议录制内容：\n[查看会议录制](https://zoom.us/rec/share/)\n\nZoom团队\n© 2023 Zoom Video Communications, Inc. 保留所有权利。",
                     "is_phishing": False
                 }
             ]
@@ -117,6 +202,32 @@ def get_sample_levels() -> List[Dict[str, Any]]:
                     "content": "尊敬的客户：\n\n我们检测到您的账户存在异常登录尝试，为保障您的账户安全，请立即验证您的身份信息。\n\n请点击以下链接进入安全验证页面：\n[验证身份](https://secure-login.com/bank-of-china/verify)\n\n如不是您本人操作，请忽略此邮件并联系我们的客服热线：400-888-8888\n\n中国银行 客户服务中心",
                     "is_phishing": True,
                     "phishing_clue": "发件人地址使用了复合域名(bank-of-china.secure-login.com)而不是官方域名(boc.cn)，这是一种高级的域名伪装技术。正规银行绝不会通过邮件链接要求验证身份信息。"
+                },
+                {
+                    "sender": "it-support@company-name.com",
+                    "subject": "紧急：公司VPN访问凭证重置",
+                    "content": "亲爱的同事：\n\n由于我们最近检测到的安全漏洞，IT部门正在更新所有员工的VPN访问凭证。\n\n作为安全措施的一部分，请在今天下班前使用以下链接重置您的VPN密码：\n[重置VPN密码](https://company-name-vpn.security-update.net)\n\n此链接将在24小时后失效。如有任何问题，请联系IT支持部门。\n\n谢谢配合！\nIT支持团队",
+                    "is_phishing": True,
+                    "phishing_clue": "虽然邮件似乎来自公司IT部门，但链接指向可疑域名(security-update.net)而非公司的官方域名；IT部门一般不会通过外部链接处理内部系统的密码重置。"
+                },
+                {
+                    "sender": "no-reply@amazon.com",
+                    "subject": "您的订单 #203-7654321-1234567 已发货",
+                    "content": "您好，\n\n您的订单已从我们的仓库发出，预计将在2023年12月12日送达。\n\n订单编号: #203-7654321-1234567\n物流信息: Amazon Logistics (AMZL_US)\n跟踪号: TBA45678901234\n\n查看订单详情和跟踪包裹：\n[查看订单状态](https://www.amazon.com/gp/css/order-details)\n\n感谢您在Amazon购物！\n\n© 1996-2023, Amazon.com, Inc. 或其附属公司",
+                    "is_phishing": False
+                },
+                {
+                    "sender": "notification@docusign.net",
+                    "subject": "财务合同等待您签署 - 请尽快处理",
+                    "content": "尊敬的合作伙伴，\n\n您有一份重要的财务合同需要签署。请在72小时内完成签署。\n\n文件名称：2023-Q4财务协议\n发送人：财务部门\n到期日：2023年12月15日\n\n点击以下链接查看并签署文件：\n[查看文档](https://docusign-secure.contract-sign.com/view)\n\n如有任何问题，请直接回复此邮件。\n\nDocuSign Electronic Signature Service\n© DocuSign Inc. 2023",
+                    "is_phishing": True,
+                    "phishing_clue": "虽然发件人域名(docusign.net)看似正确，但链接指向伪造网站(docusign-secure.contract-sign.com)。真实的DocuSign邮件会链接到docusign.com或docusign.net域名。"
+                },
+                {
+                    "sender": "reservations@marriott.com",
+                    "subject": "您的酒店预订确认 #MR123456789",
+                    "content": "尊敬的会员，\n\n感谢您选择万豪酒店。您的预订已确认：\n\n预订号：MR123456789\n酒店：上海静安万豪酒店\n入住日期：2023年12月20日\n退房日期：2023年12月22日\n客房类型：豪华大床房\n\n您可以通过以下链接管理您的预订：\n[管理预订](https://www.marriott.com/reservation/lookup.mi)\n\n期待您的光临！\n\n© 2023 Marriott International, Inc. 保留所有权利。",
+                    "is_phishing": False
                 }
             ]
         },

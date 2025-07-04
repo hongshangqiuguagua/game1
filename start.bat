@@ -7,6 +7,9 @@ echo.
 REM 设置项目根目录
 cd /d "%~dp0"
 
+echo [INFO] 如果这是首次运行或需要重置数据，请先运行 init_database.bat
+echo.
+
 echo [INFO] 在新窗口中启动后端服务器...
 start "Backend Server" cmd /k "start_backend.bat"
 
