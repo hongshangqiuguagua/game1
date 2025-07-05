@@ -33,3 +33,115 @@
 2025-07-04 18:47:25,255 - app.routers.admin - INFO - 管理员 admin 请求邮件错误率统计
 2025-07-04 18:47:37,176 - app.routers.auth - INFO - 用户登录请求: admin
 2025-07-04 18:47:37,591 - app.routers.auth - INFO - 用户登录成功: admin, 是管理员=True
+2025-07-04 18:51:38,939 - __main__ - INFO - 启动 钓鱼邮件识别教学游戏 v1.0.0
+2025-07-04 18:51:38,941 - __main__ - INFO - 数据库URL: sqlite:///../sql_app.db
+2025-07-04 18:51:38,941 - __main__ - INFO - 服务器配置: host=0.0.0.0, port=8000, reload=True
+2025-07-04 18:51:38,941 - __main__ - INFO - 启动服务器...
+2025-07-04 18:52:22,110 - app.routers.auth - INFO - 用户注册请求: asd, 1151123638@qq.com
+2025-07-04 18:52:22,454 - app.routers.auth - INFO - 用户注册成功: asd
+2025-07-04 18:52:22,472 - app.routers.auth - INFO - 用户登录请求: asd
+2025-07-04 18:52:22,816 - app.routers.auth - INFO - 用户登录成功: asd, 是管理员=False
+2025-07-04 18:52:44,350 - app.routers.game - INFO - 用户 asd 提交关卡 1 的结果
+2025-07-04 18:52:44,395 - app.crud.player_record - INFO - 创建了玩家记录: user_id=2, level_id=1, score=4/6
+2025-07-04 18:52:44,397 - app.routers.game - INFO - 用户 asd 完成关卡 1，得分: 4/6
+2025-07-04 18:53:11,761 - app.routers.auth - INFO - 用户登录请求: admin
+2025-07-04 18:53:12,064 - app.routers.auth - INFO - 用户登录成功: admin, 是管理员=True
+2025-07-04 18:53:14,794 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:53:14,796 - app.routers.admin - INFO - 管理员请求获取所有关卡
+2025-07-04 18:53:22,498 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:53:22,499 - app.routers.admin - INFO - 管理员 admin 创建新关卡: asd
+2025-07-04 18:53:22,535 - app.crud.level - INFO - 创建了新关卡: asd (order: 1)
+2025-07-04 18:53:22,555 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:53:22,556 - app.routers.admin - INFO - 管理员请求获取所有关卡
+2025-07-04 18:53:23,464 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:53:23,464 - app.routers.admin - INFO - 管理员请求获取所有关卡
+2025-07-04 18:53:23,475 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:53:23,476 - app.routers.admin - INFO - 管理员 admin 获取关卡 ID=6 的邮件列表
+2025-07-04 18:53:35,986 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:53:35,987 - app.routers.admin - INFO - 管理员 admin 创建新邮件: asd (关卡ID=6)
+2025-07-04 18:53:36,026 - app.crud.email - INFO - 创建了新邮件: asd (level_id: 6)
+2025-07-04 18:53:36,042 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:53:36,043 - app.routers.admin - INFO - 管理员 admin 获取关卡 ID=6 的邮件列表
+2025-07-04 18:53:36,062 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:53:36,063 - app.routers.admin - INFO - 管理员 admin 获取关卡 ID=6 的邮件列表
+2025-07-04 18:53:42,933 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:53:42,934 - app.routers.admin - INFO - 管理员 admin 更新邮件 ID=36
+2025-07-04 18:53:42,972 - app.crud.email - INFO - 更新了邮件: ID=36
+2025-07-04 18:53:42,994 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:53:42,996 - app.routers.admin - INFO - 管理员 admin 获取关卡 ID=6 的邮件列表
+2025-07-04 18:53:43,010 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:53:43,011 - app.routers.admin - INFO - 管理员 admin 获取关卡 ID=6 的邮件列表
+2025-07-04 18:53:50,784 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:53:50,786 - app.routers.admin - INFO - 管理员请求获取所有关卡
+2025-07-04 18:53:52,493 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:53:52,494 - app.routers.admin - INFO - 管理员 admin 请求邮件错误率统计
+2025-07-04 18:54:01,561 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 18:54:01,562 - app.routers.admin - INFO - 管理员请求获取所有关卡
+2025-07-04 18:54:07,769 - app.routers.game - INFO - 用户 admin 提交关卡 6 的结果
+2025-07-04 18:54:07,791 - app.crud.player_record - INFO - 创建了玩家记录: user_id=1, level_id=6, score=1/1
+2025-07-04 18:54:07,792 - app.routers.game - INFO - 用户 admin 完成关卡 6，得分: 1/1
+2025-07-04 19:15:49,548 - __main__ - INFO - 启动 钓鱼邮件识别教学游戏 v1.0.0
+2025-07-04 19:15:49,548 - __main__ - INFO - 数据库URL: sqlite:///../sql_app.db
+2025-07-04 19:15:49,548 - __main__ - INFO - 服务器配置: host=0.0.0.0, port=8000, reload=True
+2025-07-04 19:15:49,549 - __main__ - INFO - 启动服务器...
+2025-07-04 19:16:30,663 - app.routers.auth - INFO - 用户注册请求: 123, 1151123638@qq.com
+2025-07-04 19:16:31,028 - app.routers.auth - INFO - 用户注册成功: 123
+2025-07-04 19:16:31,045 - app.routers.auth - INFO - 用户登录请求: 123
+2025-07-04 19:16:31,339 - app.routers.auth - INFO - 用户登录成功: 123, 是管理员=False
+2025-07-04 19:16:53,700 - app.routers.game - INFO - 用户 123 提交关卡 1 的结果
+2025-07-04 19:16:53,737 - app.crud.player_record - INFO - 创建了玩家记录: user_id=2, level_id=1, score=3/6
+2025-07-04 19:16:53,740 - app.routers.game - INFO - 用户 123 完成关卡 1，得分: 3/6
+2025-07-04 19:17:16,169 - app.routers.auth - INFO - 用户登录请求: admin
+2025-07-04 19:17:16,460 - app.routers.auth - INFO - 用户登录成功: admin, 是管理员=True
+2025-07-04 19:17:21,271 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:21,272 - app.routers.admin - INFO - 管理员请求获取所有关卡
+2025-07-04 19:17:30,467 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:30,469 - app.routers.admin - INFO - 管理员 admin 创建新关卡: asd
+2025-07-04 19:17:30,501 - app.crud.level - INFO - 创建了新关卡: asd (order: 1)
+2025-07-04 19:17:30,518 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:30,520 - app.routers.admin - INFO - 管理员请求获取所有关卡
+2025-07-04 19:17:31,744 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:31,745 - app.routers.admin - INFO - 管理员请求获取所有关卡
+2025-07-04 19:17:31,756 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:31,757 - app.routers.admin - INFO - 管理员 admin 获取关卡 ID=6 的邮件列表
+2025-07-04 19:17:44,112 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:44,114 - app.routers.admin - INFO - 管理员 admin 创建新邮件: asd (关卡ID=6)
+2025-07-04 19:17:44,149 - app.crud.email - INFO - 创建了新邮件: asd (level_id: 6)
+2025-07-04 19:17:44,161 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:44,162 - app.routers.admin - INFO - 管理员 admin 获取关卡 ID=6 的邮件列表
+2025-07-04 19:17:44,183 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:44,185 - app.routers.admin - INFO - 管理员 admin 获取关卡 ID=6 的邮件列表
+2025-07-04 19:17:47,799 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:47,802 - app.routers.admin - INFO - 管理员 admin 更新邮件 ID=36
+2025-07-04 19:17:47,852 - app.crud.email - INFO - 更新了邮件: ID=36
+2025-07-04 19:17:47,867 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:47,869 - app.routers.admin - INFO - 管理员 admin 获取关卡 ID=6 的邮件列表
+2025-07-04 19:17:47,881 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:47,882 - app.routers.admin - INFO - 管理员 admin 获取关卡 ID=6 的邮件列表
+2025-07-04 19:17:50,997 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:50,999 - app.routers.admin - INFO - 管理员 admin 更新邮件 ID=36
+2025-07-04 19:17:51,033 - app.crud.email - INFO - 更新了邮件: ID=36
+2025-07-04 19:17:51,041 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:51,042 - app.routers.admin - INFO - 管理员 admin 获取关卡 ID=6 的邮件列表
+2025-07-04 19:17:51,054 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:51,056 - app.routers.admin - INFO - 管理员 admin 获取关卡 ID=6 的邮件列表
+2025-07-04 19:17:52,847 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:17:52,848 - app.routers.admin - INFO - 管理员 admin 请求邮件错误率统计
+2025-07-04 19:18:02,320 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:18:02,321 - app.routers.admin - INFO - 管理员请求获取所有关卡
+2025-07-04 19:18:06,627 - app.routers.game - INFO - 用户 admin 提交关卡 6 的结果
+2025-07-04 19:18:06,660 - app.crud.player_record - INFO - 创建了玩家记录: user_id=1, level_id=6, score=1/1
+2025-07-04 19:18:06,662 - app.routers.game - INFO - 用户 admin 完成关卡 6，得分: 1/1
+2025-07-04 19:18:10,478 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:18:10,479 - app.routers.admin - INFO - 管理员请求获取所有关卡
+2025-07-04 19:18:11,509 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:18:11,509 - app.routers.admin - INFO - 管理员 admin 请求邮件错误率统计
+2025-07-04 19:18:16,351 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:18:16,352 - app.routers.admin - INFO - 管理员请求获取所有关卡
+2025-07-04 19:18:18,907 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:18:18,908 - app.routers.admin - INFO - 管理员 admin 删除关卡 ID=6
+2025-07-04 19:18:18,929 - app.crud.level - INFO - 删除了关卡: ID=6, 名称=asd
+2025-07-04 19:18:18,942 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:18:18,943 - app.routers.admin - INFO - 管理员请求获取所有关卡
+2025-07-04 19:18:20,277 - app.dependencies - INFO - 管理员访问: admin
+2025-07-04 19:18:20,278 - app.routers.admin - INFO - 管理员 admin 请求邮件错误率统计
